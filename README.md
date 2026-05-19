@@ -10,15 +10,78 @@ A professional lead generation and automated outreach system that integrates a *
 
 ---
 
-## 🏗️ Architectural Overview & Data Flow
+## 🏗️ System Architecture & Complex Data Flow
+
+This diagram illustrates the multi-tier architecture, showing how the control dashboard spawns background processes, schedules resources, and communicates with AI engines and browser drivers to automate operations.
 
 ```mermaid
-graph TD
-    A["Web UI (Laravel Dashboard)"] -- "Spawns Background Process" --> B["PythonRunner Service"]
-    B --> C["Python Automation Scripts"]
-    C -- "Undetected Chromedriver" --> D["LinkedIn Platform"]
-    C -- "Callbacks / DB Updates" --> E["MySQL Database & Logs"]
-    E --> A
+graph TB
+    subgraph WebInterface ["💻 Control Center (Laravel 12 Dashboard)"]
+        UI["Vue/Alpine UI Dashboard"]
+        C_Lead["Leads Controller (Deduplication & Queues)"]
+        C_Conn["Auto-Connect Controller (Macro Batches)"]
+        C_Msg["Auto-Message Controller (AI Orchestrator)"]
+        C_Inbox["Inbox & Response Controller"]
+    end
+
+    subgraph BackendServices ["⚙️ Backend & DB Layer"]
+        DB[("MySQL Database<br>leads | settings | sent_messages | inbox")]
+        PR["PythonRunner Service (proc_open Spawner)"]
+    end
+
+    subgraph AutomationEngine ["🤖 Autonomous Python Agents"]
+        Scraper["scraper.py<br>(Google Dork Parser & Subdomain Router)"]
+        Connector["auto_connect.py<br>(Macro Replay & DPI Calibration)"]
+        Messenger["auto_message.py<br>(Personalized Outreach Driver)"]
+        Inbox["inbox_checker.py<br>(Background Response Polling Daemon)"]
+    end
+
+    subgraph APIs ["🌐 External Integrations & Browser"]
+        Gemini["Google Gemini Pro 2.5 API<br>(Contextual Prompt Processing)"]
+        UC["undetected-chromedriver (Chrome)<br>(Profile Cache & Human Typing Emulation)"]
+        GoogleSearch["Google Search Engine"]
+        LinkedIn["LinkedIn Platform"]
+    end
+
+    %% UI Interactions
+    UI --> C_Lead & C_Conn & C_Msg & C_Inbox
+    C_Lead & C_Conn & C_Msg & C_Inbox --> DB
+    
+    %% Spawning Processes
+    C_Lead -->|Trigger Scrape| PR
+    C_Conn -->|Trigger Connect| PR
+    C_Msg -->|Trigger Message| PR
+    C_Inbox -->|Trigger Monitor| PR
+    
+    PR -->|Execute CLI| Scraper & Connector & Messenger & Inbox
+    
+    %% Scraper Data Flow
+    Scraper -->|Query Subdomain| GoogleSearch
+    GoogleSearch -->|Return Profiles| Scraper
+    Scraper -->|Callback: HTTP POST| C_Lead
+    
+    %% AI Generation Flow
+    Messenger -->|Request Dynamic Text| Gemini
+    Gemini -->|Return Personalized Message| Messenger
+    
+    %% Chrome Automation Flow
+    Connector & Messenger & Inbox -->|Control API| UC
+    UC -->|Interactions / Clicks| LinkedIn
+    
+    %% Database Updates
+    Connector -->|Log Action| DB
+    Messenger -->|Update Sent Status| DB
+    Inbox -->|Sync Incoming Messages| DB
+    
+    classDef control fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef backend fill:#0f172a,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef engine fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#f8fafc;
+    classDef api fill:#451a03,stroke:#fb923c,stroke-width:2px,color:#f8fafc;
+    
+    class UI,C_Lead,C_Conn,C_Msg,C_Inbox control;
+    class DB,PR backend;
+    class Scraper,Connector,Messenger,Inbox engine;
+    class Gemini,UC,GoogleSearch,LinkedIn api;
 ```
 
 ### 🌟 Core Features & Workflows
@@ -45,15 +108,78 @@ graph TD
 
 ---
 
-## 🏗️ نظرة عامة على بنية النظام
+## 🏗️ نظرة عامة على بنية النظام وهندسة البيانات
+
+يوضح هذا المخطط الهيكلي بنية النظام متعددة الطبقات، وكيفية إطلاق العمليات في الخلفية وجدولة المهام والتواصل مع نماذج الذكاء الاصطناعي ومحركات المتصفح لتنفيذ العمليات.
 
 ```mermaid
-graph TD
-    A["واجهة المستخدم (لوحة تحكم Laravel)"] -- "تشغيل عملية في الخلفية" --> B["خدمة PythonRunner"]
-    B --> C["سكربتات بايثون للأتمتة"]
-    C -- "متصفح كروم المخفي" --> D["منصة لينكد إن"]
-    C -- "استدعاءات وقاعدة بيانات" --> E["قاعدة بيانات MySQL والسجلات"]
-    E --> A
+graph TB
+    subgraph WebInterface ["💻 مركز التحكم (لوحة تحكم لارافيل 12)"]
+        UI["واجهة المستخدم ولوحة البيانات"]
+        C_Lead["متحكم العملاء (إلغاء التكرار والجدولة)"]
+        C_Conn["متحكم الاتصالات (دفعات الماكرو التلقائية)"]
+        C_Msg["متحكم الرسائل (صياغة الذكاء الاصطناعي)"]
+        C_Inbox["متحكم صندوق الوارد والردود"]
+    end
+
+    subgraph BackendServices ["⚙️ طبقة الخدمات وقاعدة البيانات"]
+        DB[("قاعدة بيانات MySQL<br>العملاء | الإعدادات | سجل الرسائل")]
+        PR["خدمة تشغيل سكربتات بايثون (PythonRunner)"]
+    end
+
+    subgraph AutomationEngine ["🤖 محركات أتمتة بايثون المستقلة"]
+        Scraper["مستخرج البيانات scraper.py<br>(توجيه النطاقات والبحث الجغرافي)"]
+        Connector["منشئ الاتصالات auto_connect.py<br>(محاكاة النقرات وحل إحداثيات الشاشة)"]
+        Messenger["منشئ الرسائل auto_message.py<br>(مراسلة مخصصة وبسرعات بشرية)"]
+        Inbox["فاحص الرسائل inbox_checker.py<br>(مراقبة صندوق الوارد وجلب الردود)"]
+    end
+
+    subgraph APIs ["🌐 التكامل الخارجي وحماية المتصفح"]
+        Gemini["واجهة Google Gemini API<br>(توليد نصوص ذكية مخصصة)"]
+        UC["متصفح كروم الآمن (undetected-chromedriver)<br>(محاكاة الكتابة وملفات التعريف المعزولة)"]
+        GoogleSearch["محرك بحث جوجل"]
+        LinkedIn["منصة لينكد إن"]
+    end
+
+    %% UI Interactions
+    UI --> C_Lead & C_Conn & C_Msg & C_Inbox
+    C_Lead & C_Conn & C_Msg & C_Inbox --> DB
+    
+    %% Spawning Processes
+    C_Lead -->|بدء الاستخراج| PR
+    C_Conn -->|بدء طلبات الإضافة| PR
+    C_Msg -->|بدء المراسلة| PR
+    C_Inbox -->|بدء مراقبة الرسائل| PR
+    
+    PR -->|تشغيل السكربتات| Scraper & Connector & Messenger & Inbox
+    
+    %% Scraper Data Flow
+    Scraper -->|بحث متقدم بالنطاق الجغرافي| GoogleSearch
+    GoogleSearch -->|إرجاع روابط الملفات الشخصية| Scraper
+    Scraper -->|إشعار خلفي (HTTP POST)| C_Lead
+    
+    %% AI Generation Flow
+    Messenger -->|طلب توليد نص مخصص للعميل| Gemini
+    Gemini -->|إرجاع نص الرسالة الذكي| Messenger
+    
+    %% Chrome Automation Flow
+    Connector & Messenger & Inbox -->|التحكم في العمليات| UC
+    UC -->|تنفيذ النقرات والمحاكاة| LinkedIn
+    
+    %% Database Updates
+    Connector -->|تحديث حالة الإرسال| DB
+    Messenger -->|تحديث حالة الرسالة| DB
+    Inbox -->|حفظ الرسائل الواردة وتحديث الردود| DB
+    
+    classDef control fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef backend fill:#0f172a,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef engine fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#f8fafc;
+    classDef api fill:#451a03,stroke:#fb923c,stroke-width:2px,color:#f8fafc;
+    
+    class UI,C_Lead,C_Conn,C_Msg,C_Inbox control;
+    class DB,PR backend;
+    class Scraper,Connector,Messenger,Inbox engine;
+    class Gemini,UC,GoogleSearch,LinkedIn api;
 ```
 
 ### 🌟 مسارات العمل والمميزات الرئيسية
