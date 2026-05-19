@@ -1,9 +1,9 @@
 # 🚀 LinkedIn Pro: Advanced Automation & Outreach Suite
 ### نظام أتمتة وإدارة عملاء لينكد إن المتقدم
 
-A premium, enterprise-grade lead generation and automated outreach system that leverages **Laravel 12** as a control center and **Python Selenium (undetected-chromedriver)** as autonomous browser agents. Powered by **Google Gemini AI**, this suite manages the entire lead lifecycle from extraction to connection building, personalized messaging, and response monitoring.
+A professional lead generation and automated outreach system that integrates a **Laravel 12** control panel with autonomous **Python Selenium** agents and **Google Gemini AI**.
 
-نظام متميز وعالي الكفاءة لإدارة العملاء والتواصل التلقائي على منصة لينكد إن. يدمج النظام بين قوة إطار عمل **Laravel 12** كمركز تحكم رئيسي، ومحركات أتمتة مستقلة بلغة **Python (Selenium)** لتشغيل المتصفح، مع دمج الذكاء الاصطناعي **Google Gemini AI** لتخصيص الرسائل وإدارة دورة حياة العميل بالكامل من الاستخراج إلى المراسلة وتتبع الردود.
+نظام متميز لإدارة العملاء والتواصل التلقائي على منصة لينكد إن، يدمج بين لوحة تحكم بـ **Laravel 12** ومحركات أتمتة مستقلة بلغة **Python (Selenium)** مع دمج الذكاء الاصطناعي **Google Gemini AI**.
 
 ---
 
@@ -14,18 +14,7 @@ A premium, enterprise-grade lead generation and automated outreach system that l
 
 ---
 
-## 📺 Video Showcase | عرض الفيديو التوضيحي
-Below is a video walkthrough demonstrating the live execution of the tool, browser control, and lead tracking:  
-يوجد أدناه مقطع فيديو توضيحي يستعرض آلية عمل الأداة ولوحة التحكم والتحكم في المتصفح بشكل حي:
-
-📁 **[Watch the LinkedIn Pro Demo Video | شاهد الفيديو التوضيحي](DEMO_VIDEO_LINK_HERE)**
-
----
-
-# 🇺🇸 English Version
-
-## 🏗️ Architectural Overview & Data Flow
-The application utilizes a decoupled architecture where the Laravel backend manages the state, schedules background tasks, and displays real-time statistics, while autonomous Python subprocesses execute browser automations.
+## 🏗️ Architectural Overview & Data Flow / بنية النظام وتدفق البيانات
 
 ```mermaid
 graph TD
@@ -38,14 +27,13 @@ graph TD
 
 ---
 
-## 🌟 Key Modules & Core Features
+## 🇺🇸 English Version
 
-### 1. 🔍 Precision Lead Extractor (Google Dorking Engine)
-* **Bypassing Commercial Limits**: Instead of visiting LinkedIn directly (which triggers commercial search limits and accounts flags), the tool converts complex search URLs into optimized Google Dorks.
-* **Country Subdomain Routing**: Dynamically maps search queries through global Google subdomains (e.g. `google.ae`, `google.co.uk`) matching the target country to fetch localized results.
-* **Data Cleansing & Deduplication**: Extracted data (names, titles, locations, companies, avatar URLs) undergoes a pre-save database check to prevent duplicate outreach.
+### 🌟 Core Workflows & Features
 
-#### Lead Extraction Flow:
+#### 1. Lead Extraction Flow (Google Dorking Engine)
+Bypasses LinkedIn's commercial search limits by converting search filters into targeted Google Dork queries routed through geographic subdomains.
+
 ```mermaid
 sequenceDiagram
     participant User as User / Admin
@@ -65,14 +53,9 @@ sequenceDiagram
     DB-->>User: Renders leads list on Dashboard
 ```
 
-### 2. ⚡ Autonomous Connection Builder (Macro Replay Engine)
-* **DPI-Calibrated Coordinates**: Bypasses traditional coordinate shifts caused by Windows screen scaling, ensuring precise mouse clicks on targets.
-* **Layout Adaptation (Scenario Detection)**:
-  * **Scenario 1**: Connect button is directly visible on the profile.
-  * **Scenario 2**: Connect button is nested inside the "More" dropdown.
-  * The bot dynamically evaluates the DOM structure to execute the appropriate macro.
+#### 2. Connection Builder (Macro Replay Engine)
+Automates invitations using DPI-calibrated mouse clicks. The agent automatically detects profile button layouts and triggers the correct connection flow (direct connect vs dropdown connect).
 
-#### Macro Replay Decision Tree:
 ```mermaid
 graph TD
     Start["Access Profile URL"] --> Check["Evaluate DOM Elements"]
@@ -84,48 +67,26 @@ graph TD
     CheckSent -->|Failed/Blocked| Error["Log Error Reason in DB"]
 ```
 
-### 3. 🤖 AI-Enriched Personalized Messaging
-* **Gemini AI Integration**: Uses Google's Gemini 2.5 API to read profile headlines and current company names, generating highly personalized, non-generic invitation and follow-up messages.
-* **Human-Mimicking Typing Speed**: Simulates physical keystrokes with randomized delays (50ms to 150ms per character) to defeat bot-detection heuristics.
+#### 3. AI-Personalized Messaging & Response Tracking
+* **Gemini AI Integration**: Generates contextual invitation and follow-up messages based on target's profile data.
+* **Keystroke Simulation**: Types out messages with randomized delays (50-150ms) to bypass automation checks.
+* **Inbox Monitoring**: Periodic background scans automatically mark leads as `Replied` when they respond.
 
-### 4. 📬 Real-time Inbox Monitor & Response Tracker
-* **Background Inbox Daemon**: Runs periodically in the background, checking active LinkedIn chatrooms for new incoming messages.
-* **Auto-Status Upgrades**: Instantly marks leads as `Replied` on the Laravel dashboard, highlighting hot leads for manual conversion.
-
----
-
-## 🛠️ Technology Stack
-* **Control Panel**: Laravel 12, Alpine.js, Tailwind CSS / Custom CSS Gradient System.
-* **Automation Core**: Python 3.13, Selenium, `undetected-chromedriver` (Subprocess-isolated configuration).
-* **AI Orchestration**: Google Gemini 2.5 Flash / Pro API (Personalized Prompt System).
-* **Database**: MySQL (relational tracking, connection status, log stores).
+### 🛠️ Technology Stack
+* **Control Panel**: Laravel 12, Alpine.js, Tailwind CSS / Custom CSS.
+* **Automation Core**: Python 3.13, Selenium, `undetected-chromedriver`.
+* **AI Orchestration**: Google Gemini 2.5 Flash / Pro API.
+* **Database**: MySQL.
 
 ---
 
-# 🇪🇬 النسخة العربية (Arabic Version)
+## 🇪🇬 النسخة العربية (Arabic Version)
 
-## 🏗️ نظرة عامة على بنية النظام وتدفق البيانات
-يعتمد التطبيق على بنية برمجية منفصلة المهام، حيث تدير الواجهة الخلفية بـ Laravel حالة التطبيق والجدولة وإحصائيات العمليات، بينما تقوم عمليات Python المستقلة بتنفيذ إجراءات المتصفح في الخلفية.
+### 🌟 مسارات العمل والمميزات الرئيسية
 
-```mermaid
-graph TD
-    A["واجهة المستخدم (لوحة تحكم Laravel)"] -- "تشغيل عملية في الخلفية (proc_open)" --> B["خدمة PythonRunner"]
-    B --> C["سكربتات بايثون للأتمتة"]
-    C -- "متصفح كروم المخفي" --> D["منصة لينكد إن"]
-    C -- "استدعاءات خلفية وقواعد بيانات" --> E["قاعدة بيانات MySQL والسجلات"]
-    E --> A
-```
+#### 1. تدفق استخراج العملاء المستهدفين (محرك Google Dorking)
+يتخطى قيود البحث التجاري للينكد إن عبر تحويل فلاتر البحث إلى استعلامات بحث متقدمة في جوجل وتوجيهها إقليمياً.
 
----
-
-## 🌟 الوحدات البرمجية والميزات الرئيسية
-
-### 1. 🔍 مستخرج العملاء بدقة عالية (محرك Google Dorking)
-* **تخطي قيود لينكد إن**: بدلاً من فحص منصة لينكد إن مباشرة (والذي يسبب حظر الحسابات)، تحول الأداة رابط الفلاتر المعقد إلى استعلام بحث متقدم في جوجل (Google Dork).
-* **توجيه النطاقات الجغرافي**: يوجه محرك البحث استعلاماته عبر نطاقات جوجل الإقليمية (مثل `google.ae` أو `google.co.uk`) لمطابقة البلد المستهدف والحصول على نتائج دقيقة ومحلية.
-* **تنظيف وتصفية البيانات**: تخضع البيانات المستخرجة (الاسم، المسمى الوظيفي، الموقع، الشركة، الصورة الشخصية) لفحص تكرار صارم لمنع تكرار التواصل مع نفس الشخص.
-
-#### تدفق استخراج العملاء المستهدفين:
 ```mermaid
 sequenceDiagram
     participant User as المستخدم / المدير
@@ -145,14 +106,9 @@ sequenceDiagram
     DB-->>User: عرض قوائم العملاء الجدد في لوحة التحكم
 ```
 
-### 2. ⚡ منشئ الاتصالات التلقائي (محرك محاكاة السيناريوهات)
-* **معايرة إحداثيات الشاشة**: تتفوق الأداة على مشاكل تغيير مقاييس الشاشة (DPI) في ويندوز، مما يضمن النقر بدقة على الأزرار دون انحراف مؤشر الماوس.
-* **التعرف التلقائي على الواجهة (Scenario Detection)**:
-  * **السيناريو الأول**: زر الإضافة (Connect) ظاهر بشكل مباشر في الصفحة الشخصية.
-  * **السيناريو الثاني**: زر الإضافة مخفي داخل قائمة "المزيد" (More).
-  * يقوم البوت بتحليل الهيكل الهيكلي للصفحة شخصياً واتخاذ مسار الضغط الأنسب.
+#### 2. منشئ الاتصالات التلقائي (محرك محاكاة السيناريوهات)
+يؤتمت إرسال الطلبات بالاعتماد على إحداثيات شاشة دقيقة. يتعرف البوت تلقائياً على واجهة زر الإضافة ويحدد سيناريو الضغط المناسب (إضافة مباشرة أم عبر قائمة المزيد).
 
-#### شجرة اتخاذ القرار لعمليات الإضافة:
 ```mermaid
 graph TD
     Start["الدخول إلى ملف العميل الشخصي"] --> Check["تحليل عناصر الصفحة (DOM)"]
@@ -164,21 +120,16 @@ graph TD
     CheckSent -->|فشلت العملية| Error["تسجيل سبب الفشل في قاعدة البيانات للتحليل"]
 ```
 
-### 3. 🤖 مراسلة مخصصة معززة بالذكاء الاصطناعي
-* **دمج مع Gemini AI**: تستخدم الأداة نموذج الذكاء الاصطناعي لقراءة المسمى الوظيفي والشركة الحالية للعميل، وصياغة رسالة مخصصة فريدة تزيد من نسبة قبول الطلبات وتجنب الصيغ الجاهزة المكررة.
-* **محاكاة سرعة الكتابة البشرية**: يكتب البوت الرسائل حرفاً بحرف بتأخير عشوائي مابين (50 إلى 150 مللي ثانية لكل حرف) لتخطي خوارزميات كشف البوتات.
+#### 3. مراسلة معززة بالذكاء الاصطناعي وتتبع الردود
+* **دمج مع Gemini AI**: صياغة رسائل مخصصة للعملاء بناءً على مسمياتهم الوظيفية الحالية.
+* **محاكاة الكتابة**: كتابة الرسائل حرفاً بحرف بتأخير عشوائي مابين (50 إلى 150 مللي ثانية) لتفادي الكشف.
+* **مراقبة صندوق الوارد**: فحص دوري يقوم بتحديث حالة العميل إلى "تم الرد" تلقائياً في لوحة التحكم عند استلام رده.
 
-### 4. 📬 فاحص صندوق الوارد ومتبع الردود التلقائي
-* **خادم الفحص الخلفي**: يعمل في الخلفية بشكل دوري لمسح غرف الدردشة النشطة في لينكد إن وجلب الرسائل الواردة الجديدة.
-* **تحديث تصنيف العملاء**: بمجرد استلام أي رسالة من العميل، يتم تغيير حالته في لوحة التحكم إلى "تم الرد" (Replied) فوراً وتنبيه المدير للتفاعل اليدوي السريع.
-
----
-
-## 🛠️ التقنيات البرمجية المستخدمة
-* **لوحة التحكم**: إطار عمل Laravel 12، مع واجهات وتنسيقات CSS وتأثيرات بصرية متقدمة.
-* **محرك الأتمتة**: لغة Python 3، ومكتبة Selenium، ومتصفح `undetected-chromedriver` لتخطي أنظمة الحماية.
-* **الذكاء الاصطناعي**: واجهة برمجة تطبيقات Google Gemini 2.5 Flash / Pro.
-* **قاعدة البيانات**: MySQL لتتبع العمليات والعملاء وإعدادات النظام.
+### 🛠️ التقنيات البرمجية المستخدمة
+* **لوحة التحكم والخلفية البرمجية**: Laravel 12، مع واجهات CSS وتأثيرات بصرية متقدمة.
+* **محرك الأتمتة**: لغة Python 3، ومكتبة Selenium، ومتصفح `undetected-chromedriver`.
+* **الذكاء الاصطناعي**: واجهة برمجة تطبيقات Google Gemini 2.5.
+* **قاعدة البيانات**: MySQL.
 
 ---
 
