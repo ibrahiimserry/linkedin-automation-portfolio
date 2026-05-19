@@ -156,7 +156,7 @@ graph TB
     %% Scraper Data Flow
     Scraper -->|بحث متقدم بالنطاق الجغرافي| GoogleSearch
     GoogleSearch -->|إرجاع روابط الملفات الشخصية| Scraper
-    Scraper -->|إشعار خلفي (HTTP POST)| C_Lead
+    Scraper -->|"إشعار خلفي (HTTP POST)"| C_Lead
     
     %% AI Generation Flow
     Messenger -->|طلب توليد نص مخصص للعميل| Gemini
