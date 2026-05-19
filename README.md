@@ -194,8 +194,3 @@ graph TB
 * **الذكاء الاصطناعي**: واجهة برمجة تطبيقات Google Gemini 2.5.
 * **قاعدة البيانات**: MySQL.
 
----
-
-## ⚠️ Disclaimer | إخلاء المسؤولية
-This tool is built for educational and research purposes. Automating LinkedIn interactions may violate LinkedIn's Terms of Service. Use responsibly and at your own risk.  
-تم تطوير هذه الأداة لأغراض تعليمية وبحثية فقط. قد تؤدي أتمتة العمليات على لينكد إن إلى انتهاك شروط الخدمة الخاصة بالمنصة. استخدمها على مسؤوليتك الخاصة.
